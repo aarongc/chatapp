@@ -1,0 +1,77 @@
+$primary-color: #88e306
+$border-transparent: 7px solid transparent
+$border-color: 10px solid $primary-color
+$border-top: 40%
+$border-side: -8px
+$border-width-height: 0
+$border-position: absolute
+$border-content: ' '
+
+.chat
+    padding: 10px 20px
+    border: 1px solid #ebeff1
+    border-left: 0px
+    border-right: 0px
+
+.message-block
+    padding: 20px 0px
+    max-width: 300px
+    
+    &.right
+        float: right
+
+        .sender
+            float: inherit
+
+.message
+    position: relative    
+    background: $primary-color
+    border-radius: 6px
+    padding: 10px
+    color: #fff
+
+    &.left::before
+        content: $border-content
+        position: $border-position
+        width: $border-width-height
+        height: $border-width-height
+        border-top: $border-transparent
+        border-bottom: $border-transparent
+        border-right: $border-color
+        left: $border-side
+        top: $border-top
+
+    &.right::after
+        content: $border-content
+        position: $border-position
+        width: $border-width-height
+        height: $border-width-height
+        border-top: $border-transparent
+        border-bottom: $border-transparent
+        border-left: $border-color
+        right: $border-side
+        top: $border-top
+
+.sender
+    padding: 1px
+    font-size: smaller
+
+.clearfix::after
+    content: ""
+    clear: both
+    display: table
+
+.chat-box 
+    position: relative
+    bottom: 0
+
+#input-message
+    background: #f5f8fa
+    border: 0
+    padding: 7px
+    margin: 20px 20px 0 10px
+    display: inline-block
+    width: 70%
+
+.btn-send
+    bottom: 1.5%
