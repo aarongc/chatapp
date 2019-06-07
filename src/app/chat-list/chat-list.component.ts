@@ -14,19 +14,19 @@ export class ChatListComponent implements OnInit {
   messages = this.getMessages(Messages);
 
   getMessages(messages) {
-    return messages.map(chat => <Chat> {
-      sender: chat.sender,
-      message: chat.message,
-      direction: chat.direction
-    });
+    return messages.map((chat: Chat) => new Chat (
+      chat.sender,
+      chat.message,
+      chat.direction
+    ));
   }
 
   onSend(): void {
-    let chat = <Chat> {
-      sender: 'Anthony',
-      message: 'Just got hired here. \n What\'s up?!',
-      direction: Direction.Left
-    };
+    let chat = new Chat (
+      'Anthony',
+      'Just got hired here. \n What\'s up?!',
+      Direction.Left
+    );
     
     this.messages.push(chat);
   }
