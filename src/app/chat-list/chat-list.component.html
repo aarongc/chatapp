@@ -2,4 +2,4 @@
   <app-message [chat]="chat" *ngFor="let chat of messages"></app-message>
 </div>
 
-<app-chat-box (send)="onSend()"></app-chat-box>
+<app-chat-box (send)="onSend($event)"></app-chat-box>

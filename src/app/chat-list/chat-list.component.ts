@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Messages } from '../messages';
 import { Chat } from '../models/chat';
-import { Direction } from '../models/enums/direction.enum';
 
 @Component({
   selector: 'app-chat-list',
@@ -9,11 +8,11 @@ import { Direction } from '../models/enums/direction.enum';
   styleUrls: ['./chat-list.component.sass']
 })
 export class ChatListComponent implements OnInit {
-  @ViewChild('chat', { read: ElementRef , static: true }) chatContainer: ElementRef;
+  @ViewChild('chat', { read: ElementRef , static: true }) private chatContainer: ElementRef;
   
   messages = this.getMessages(Messages);
 
-  getMessages(messages) {
+  getMessages(messages: any) {
     return messages.map((chat: Chat) => new Chat (
       chat.sender,
       chat.message,
@@ -21,14 +20,8 @@ export class ChatListComponent implements OnInit {
     ));
   }
 
-  onSend(): void {
-    let chat = new Chat (
-      'Anthony',
-      'Just got hired here. \n What\'s up?!',
-      Direction.Left
-    );
-    
-    this.messages.push(chat);
+  onSend(model: Chat): void {
+    this.messages.push(model);
   }
 
   constructor() { }
