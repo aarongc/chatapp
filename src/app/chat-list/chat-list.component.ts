@@ -12,7 +12,7 @@ export class ChatListComponent implements OnInit {
   @ViewChild('chat', { read: ElementRef , static: true }) chatContainer: ElementRef;
   
   messages = this.getMessages(Messages);
-  
+
   getMessages(messages) {
     return messages.map(chat => <Chat> {
       sender: chat.sender,
@@ -29,19 +29,22 @@ export class ChatListComponent implements OnInit {
     };
     
     this.messages.push(chat);
+  }
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+  
+  ngAfterViewChecked(): void {
+    //Called after every check of the component's view. Applies to components only.
+    //Add 'implements AfterViewChecked' to the class.
     this.scrollDown();
   }
 
   scrollDown(): void {
     let container = this.chatContainer.nativeElement;
 
-    container.scrollIntoView();
+    container.scrollTop = container.scrollTop + container.scrollHeight;
   }
-
-  constructor() { }
-
-  ngOnInit() {
-   
-  }
-  
 }
