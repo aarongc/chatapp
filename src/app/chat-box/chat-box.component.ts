@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, ViewChild, ElementRef } from '@angular
 import { Output } from '@angular/core';
 import { Chat } from '../models/chat';
 import { Direction } from '../models/enums/direction.enum';
-import { Validators, FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-chat-box',
@@ -20,13 +20,13 @@ export class ChatBoxComponent implements OnInit {
   ngOnInit() {
   }
 
-  ngAfterViewChecked(): void {
+  ngAfterViewChecked() {
     //Called after every check of the component's view. Applies to components only.
     //Add 'implements AfterViewChecked' to the class.
     this.setFocus();
   }
 
-  addChat(): void {
+  add() {
     const control = new FormControl(this.model.message, Validators.required);
 
     if (!control.errors) {
@@ -39,7 +39,7 @@ export class ChatBoxComponent implements OnInit {
     return new Chat('ako', '', Direction.Right);
   }
 
-  setFocus(): void {
+  setFocus() {
     this.inputMessage.nativeElement.focus();
   }
 }

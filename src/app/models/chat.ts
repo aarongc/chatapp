@@ -5,7 +5,7 @@ export class Chat {
   constructor(
     public sender: string,
     public message: string,
-    public direction: Direction
+    public direction: Direction.Right
   ) { }
 
 }

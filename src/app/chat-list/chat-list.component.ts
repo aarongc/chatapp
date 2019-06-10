@@ -20,7 +20,7 @@ export class ChatListComponent implements OnInit {
     ));
   }
 
-  onSend(model: Chat): void {
+  onSend(model: Chat) {
     this.messages.push(model);
   }
 
@@ -29,13 +29,13 @@ export class ChatListComponent implements OnInit {
   ngOnInit() {
   }
   
-  ngAfterViewChecked(): void {
+  ngAfterViewChecked() {
     //Called after every check of the component's view. Applies to components only.
     //Add 'implements AfterViewChecked' to the class.
     this.scrollDown();
   }
 
-  scrollDown(): void {
+  scrollDown() {
     let container = this.chatContainer.nativeElement;
 
     container.scrollTop = container.scrollTop + container.scrollHeight;

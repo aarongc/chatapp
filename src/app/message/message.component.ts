@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
+import { Chat } from '../models/chat';
 
 @Component({
   selector: 'app-message',
@@ -7,7 +8,7 @@ import { Input } from '@angular/core';
   styleUrls: ['../app.component.sass', './message.component.sass']
 })
 export class MessageComponent implements OnInit {
-  @Input() chat;
+  @Input() chat: Chat;
 
   constructor() { }
 

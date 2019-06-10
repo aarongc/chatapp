@@ -1,6 +1,8 @@
 <div class="chat-box">
     <form #chatForm="ngForm">
-        <input type="text" id="message" [(ngModel)]="model.message" name="message" placeholder="Start a new message" #message required autofocus>
-        <button class="btn-send" (click)="addChat()">Send</button>
+        <div class="form-group">
+            <input type="text" class="form-control" id="message" [(ngModel)]="model.message" name="message" placeholder="Start a new message" #message required autofocus>
+        </div>
+        <button (click)="add()">Send</button>
     </form>    
 </div>

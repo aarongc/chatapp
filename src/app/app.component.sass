@@ -1,4 +1,4 @@
-@import 'styles/button'
+@import 'styles/normalize', 'styles/button'
 
 $font-stack:    Calibri, Helvetica, sans-serif
 $primary-color: #4a4a4a
@@ -9,16 +9,49 @@ $primary-color: #4a4a4a
 
 .header 
     text-align: center
-    margin: 2%
+    border-bottom: 1px solid #e9ecef
+    padding: 20px 0
 
 .title
     display: inline-block
     font-weight: bold
+    margin: 0
 
-button
-    width: 18%
-    position: absolute
-    right: 2%
+#button-logout
+    float: right
+    width: 20%
 
-    &.btn-logout
-        top: 1.5%
+input[type="text"],
+input[type="password"]
+    background: #f5f8fa
+    border: 0
+    padding: 10px
+
+form
+    margin-top: 20px
+
+.form-group
+    margin: 0 20px 20px 0    
+    vertical-align: middle
+
+.form-control
+    display: block
+    width: 100%
+    padding: .375rem .75rem
+    font-size: 1rem
+    line-height: 1.5
+    color: #495057
+    background-color: #fff
+    background-clip: padding-box
+    border: 1px solid #ced4da
+    border-radius: .25rem
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out
+    vertical-align: middle
+
+.container 
+    padding: 0 20px
+
+.content
+    text-align: justify
+    padding: 0 20px
+    font-size: small
