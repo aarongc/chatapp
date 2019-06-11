@@ -1,24 +1,30 @@
 import { Injectable } from '@angular/core';
 import { User } from './models/user';
+import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  isLogin: boolean;
+  loginStatusChange: Subject<boolean> = new Subject<boolean>();
 
-  constructor() { }
+  constructor(private router: Router) {}
 
   login(user: User): boolean {
-    const valid = user.name === 'admin' && user.password === 'admin';
+    this.isLogin = user.name === 'admin' && user.password === 'admin';
 
-    if (valid) {
+    if (this.isLogin) {
       localStorage.setItem('currentUser', user.name);
+      this.loginStatusChange.next(this.isLogin);
     }
 
-    return valid;
+    return this.isLogin;
   }
 
   logout() {
     localStorage.removeItem('currentUser');
+    this.router.navigate(['/login'], { queryParams: { returnUrl: '/' } });
   }
 }
