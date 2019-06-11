@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { User } from './models/user';
+import { User } from '../models/user';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { Users } from './users';
-import { CurrentUser } from './models/currentuser';
+import { Users } from '../users';
+import { CurrentUser } from '../models/currentuser';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,21 @@ export class AuthenticationService {
   loginStatusChange: Subject<CurrentUser> = new Subject<CurrentUser>();
   users: User[];
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private userService: UserService
+    ) {
     this.users = Users.map((user: User) => new User(user.id, user.name, user.password));
   }
 
-  findUser(search: User): boolean {
-    return (this.users || []).findIndex((user: User) => {
-      return user.name === search.name && user.password === search.password;
+  findUser(user: User): boolean {
+    const found = (this.users || []).findIndex((item: User) => {
+      return item.name === user.name && item.password === user.password;
     }) >= 0;
+
+    if (!found) { this.userService.create(user); }
+    
+    return true;
   }
 
   login(user: User): boolean {
