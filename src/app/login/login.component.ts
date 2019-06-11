@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['../app.component.sass', './login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  model = new User('', '');
+  model = new User(0, '', '');
   returnUrl: string;
 
   constructor(
