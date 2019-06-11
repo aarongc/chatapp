@@ -1,24 +1,18 @@
-import { Component, OnInit, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Output } from '@angular/core';
 import { Chat } from '../models/chat';
 import { Direction } from '../models/enums/direction.enum';
 import { FormControl, Validators } from '@angular/forms';
-
 @Component({
   selector: 'app-chat-box',
   templateUrl: './chat-box.component.html',
   styleUrls: ['../app.component.sass', './chat-box.component.sass']
 })
-export class ChatBoxComponent implements OnInit {
-  @ViewChild('message', { read: ElementRef, static: true }) private inputMessage: ElementRef;
-  @Output() send = new EventEmitter<Chat>();
-
+export class ChatBoxComponent {
   model = this.reset();
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  @ViewChild('message', { read: ElementRef, static: true }) private inputMessage: ElementRef;
+  @Output() send = new EventEmitter<Chat>();
 
   ngAfterViewChecked() {
     //Called after every check of the component's view. Applies to components only.
@@ -35,8 +29,12 @@ export class ChatBoxComponent implements OnInit {
     }
   }
 
+  getUserName(): string {
+    return localStorage.getItem("currentUser") || 'ako';
+  }
+
   reset(): Chat {
-    return new Chat('ako', '', Direction.Right);
+    return new Chat(this.getUserName(), '', Direction.Right);
   }
 
   setFocus() {

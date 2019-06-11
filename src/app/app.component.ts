@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
+import { CurrentUser } from './models/currentuser';
+import { isString } from 'util';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +10,12 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AppComponent {
   title = 'Chat app';
-  isLogin = false;
+  isLogin = isString(localStorage.getItem('currentUser'));
   subscription: any;
 
   constructor (private authenticationService: AuthenticationService) {
-    this.isLogin = authenticationService.isLogin;
-    this.subscription = authenticationService.loginStatusChange.subscribe((value) => {
-      this.isLogin = value;
+    this.subscription = authenticationService.loginStatusChange.subscribe((user: CurrentUser) => {
+       this.isLogin = user.isLogin;
     });
   }
 

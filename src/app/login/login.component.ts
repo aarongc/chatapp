@@ -3,6 +3,7 @@ import { AuthenticationService } from '../authentication.service';
 import { User } from '../models/user';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CurrentUser } from '../models/currentuser';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   model = new User(0, '', '');
   returnUrl: string;
-
+  subscription: any;
+  
   constructor(
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,

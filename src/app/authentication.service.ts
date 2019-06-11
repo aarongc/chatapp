@@ -3,13 +3,14 @@ import { User } from './models/user';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Users } from './users';
+import { CurrentUser } from './models/currentuser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   isLogin: boolean;
-  loginStatusChange: Subject<boolean> = new Subject<boolean>();
+  loginStatusChange: Subject<CurrentUser> = new Subject<CurrentUser>();
   users: User[];
 
   constructor(private router: Router) {
@@ -23,11 +24,11 @@ export class AuthenticationService {
   }
 
   login(user: User): boolean {
-    this.isLogin = this.findUser(user);//user.name === 'admin' && user.password === 'admin';
+    this.isLogin = this.findUser(user);
 
     if (this.isLogin) {
       localStorage.setItem('currentUser', user.name);
-      this.loginStatusChange.next(this.isLogin);
+      this.loginStatusChange.next(new CurrentUser(user.name, this.isLogin));
     }
 
     return this.isLogin;
