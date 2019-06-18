@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { AuthenticationService } from './services/authentication.service';
 import { HomeComponent } from './home/home.component';
+import { ChatService } from './services/chat.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HomeComponent } from './home/home.component';
   ],
   providers: [
     AuthGuard,
-    AuthenticationService
+    AuthenticationService,
+    ChatService
   ],
   bootstrap: [AppComponent]
 })

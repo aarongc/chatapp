@@ -2,7 +2,6 @@ import { Component, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Output } from '@angular/core';
 import { Chat } from '../models/chat';
 import { Direction } from '../models/enums/direction.enum';
-import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-chat-box',
   templateUrl: './chat-box.component.html',
@@ -15,15 +14,11 @@ export class ChatBoxComponent {
   @Output() send = new EventEmitter<Chat>();
 
   ngAfterViewChecked() {
-    //Called after every check of the component's view. Applies to components only.
-    //Add 'implements AfterViewChecked' to the class.
     this.setFocus();
   }
 
   add() {
-    const control = new FormControl(this.model.message, Validators.required);
-
-    if (!control.errors) {
+    if (this.model.message) {
       this.send.emit(this.model);
       this.model = this.reset();
     }

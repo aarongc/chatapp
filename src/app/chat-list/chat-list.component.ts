@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Messages } from '../messages';
 import { Chat } from '../models/chat';
+import { ChatService } from '../services/chat.service';
 
 @Component({
   selector: 'app-chat-list',
@@ -10,7 +11,11 @@ import { Chat } from '../models/chat';
 export class ChatListComponent implements OnInit {
   @ViewChild('chat', { read: ElementRef , static: true }) private chatContainer: ElementRef;
   
-  messages = this.getMessages(Messages);
+  messages: Chat[] = [];
+
+  constructor(private chatService: ChatService) {
+    this.messages = this.getMessages(Messages);
+  }
 
   getMessages(messages: any) {
     return messages.map((chat: Chat) => new Chat (
@@ -21,18 +26,21 @@ export class ChatListComponent implements OnInit {
   }
 
   onSend(model: Chat) {
-    this.messages.push(model);
+    this.chatService.sendMessage(model);
   }
 
-  constructor() { }
+  ngAfterViewChecked() {
+    this.scrollDown();
+  }
 
   ngOnInit() {
+    this.subscribeToMessages();
   }
-  
-  ngAfterViewChecked() {
-    //Called after every check of the component's view. Applies to components only.
-    //Add 'implements AfterViewChecked' to the class.
-    this.scrollDown();
+
+  subscribeToMessages() {
+    this.chatService.getMessages().subscribe((message: Chat) => {
+      this.messages.push(message);
+    });
   }
 
   scrollDown() {
